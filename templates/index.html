@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Python Flask Upload and Display Image</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5; /* Light gray background */
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Container styling */
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff; /* White background */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* Main heading with a vibrant gradient */
+      h1 {
+        text-align: center;
+        color: #fff; /* White text */
+        font-size: 2em;
+        background: linear-gradient(45deg, #0c0c0c, #ffcc99);  /* Orange-pink gradient */
+        -webkit-text-fill-color: transparent;  /* Make text transparent to show gradient */
+        animation: blink 1.5s infinite alternate;
+        margin-bottom: 20px;
+      }
+      
+      @keyframes blink {
+        from { opacity: 1; }
+        to { opacity: 0.8; }
+      }
+      
+      /* Headings with a subtle underline */
+      
+     
+      .media img{
+        max-width: 100%;
+        height: auto;
+        margin-right: auto ;
+        margin-left: auto; /* Add horizontal margin between image and audio */
+        border-radius: 5px;
+      }
+      .media audio {
+        max-width: 100%;
+        height: auto;
+        margin-right: auto ;
+        margin-left: auto; /* Add horizontal margin between image and audio */
+        border-radius: 5px;
+      }
+      /* Captions styling */
+      .captions {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin-top: 20px; /* Add space between media and captions */
+      }
+      
+      /* Upload form styling */
+      .upload-form {
+        text-align: center;
+      }
+      
+      .upload-form input[type="file"] {
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-top: 20px; /* Add space between captions and upload form */
+        background-color: #f9f9f9;
+        cursor: pointer;
+      }
+      
+      .upload-form input[type="submit"] {
+        background-color: #007bff; /* Blue background */
+        color: #fff; /* White text */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px; /* Add space between upload form and next content */
+      }
+      
+      .upload-form input[type="submit"]:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+      }
+      
+      /* Processing animation (placeholder) */
+      .processing {
+        width: 50px;
+        height: 50px;
+        border: 5px solid orange;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none; /* Initially hidden */
+      }
+      
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Python Flask Upload and Display Image</h1>
+    <div class="container">
+        <div class="row">
+            <h2>Select a image or video to upload</h2>
+            <div>
+                <img src="{{ url_for('display_image', filename=filename) }}">
+                <audio controls>
+                    <source src="{{ url_for('display_audio', filename=audio_file) }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="captions">
+                <p>Caption: {{ combined_caption }}</p>
+            </div>
+            <form class="upload-form" method="post" action="/" enctype="multipart/form-data">
+                <p>
+                    <input type="file" name="file" required>
+                </p>
+                <p>
+                    <input type="submit" value="Submit">
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

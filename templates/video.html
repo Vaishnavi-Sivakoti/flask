@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Extracted Frames from Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .frame-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .frame {
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .frame img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .frame-caption {
+            padding: 10px;
+            text-align: center;
+        }
+        .frame-caption p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Extracted Frames from Video</h1>
+    <div class="container">
+        <div class="frame-container">
+            {% for frame_data in frames %}
+            <div class="frame">
+                <img src="{{ (url_for('static', filename='uploads/frames101/' + frame_data['image_path'])) }}" alt="Frame">
+                
+                <div class="frame-caption">
+                    
+                    <p><strong>Caption:</strong> {{ frame_data['caption3'] }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <audio controls>
+            <source src="{{ url_for('display_audio', filename='combined_audio.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</body>
+</html>
